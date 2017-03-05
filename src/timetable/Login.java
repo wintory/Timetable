@@ -82,7 +82,7 @@ public class Login extends JFrame implements ActionListener {
                 System.out.println("SQLException");
             }
 		if(a!=null){
-			this.showStatus.setText("Student Id : "+a.getStdid()+"    Name : "+a.getName());
+			this.showStatus.setText("Student Id : "+a.getStdid()+"    Name : "+a.getName()+"    Sec : "+a.getSec());
 		}
 		else{
 			this.showStatus.setText("Status : Fail");
