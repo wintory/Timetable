@@ -1,4 +1,4 @@
-package timetable;
+package timetable.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

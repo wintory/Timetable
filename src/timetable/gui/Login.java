@@ -1,3 +1,5 @@
+package timetable.gui;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -5,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import timetable.Account;
+import timetable.model.Account;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
