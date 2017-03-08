@@ -93,7 +93,7 @@ public class Subject {
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.setString(1,subid.toUpperCase());
             ResultSet rs = pstm.executeQuery();
-            if(rs.next()){
+            while(rs.next()){
                 s = new Subject();
                 s.setSubId(rs.getInt("subId"));
                 s.setSubjectId(rs.getString("subjectId"));
@@ -101,9 +101,7 @@ public class Subject {
                 s.setSec(rs.getInt("sec"));
                 s.setStdDay(rs.getString("stdDay"));
                 s.setStrTime(rs.getString("strTime"));
-                s.setEnTime(rs.getString("enTime"));
-                System.out.println(s.getSubId());
-                System.out.println(s.getSubjectName());
+                s.setEnTime(rs.getString("enTime"));                
             }
         } catch (Exception e) {
             System.out.println(e);
