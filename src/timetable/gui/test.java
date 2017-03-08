@@ -6,6 +6,8 @@
 package timetable.gui;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import timetable.model.Subject;
 
 /**
@@ -14,7 +16,10 @@ import timetable.model.Subject;
  */
 public class test {
     public static void main(String[] args) throws SQLException {
-        Subject s = new Subject();
-        s.searchSubject("INT101");
+        List<Subject> list = Subject.searchSubject("INT101");
+        if(list!=null){
+            Subject s = new Subject();
+            System.out.println(s);
+        }
     }
 }
