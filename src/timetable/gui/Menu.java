@@ -5,11 +5,21 @@
  */
 package timetable.gui;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import timetable.model.Account;
+
 /**
  *
  * @author Thanapol
  */
 public class Menu extends javax.swing.JFrame {
+    
+    private String id;
+    private String name;
+    private String surname;
+    private int sec;
     
     public Menu() {
         initComponents();
@@ -25,6 +35,10 @@ public class Menu extends javax.swing.JFrame {
         if(sub.equals(chk)){
             jButton2.setVisible(false);
         }
+        this.id = id;
+        this.name=name;
+        this.sec=sec;
+        this.surname=surname;
     }
 
     /**
@@ -43,7 +57,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 102));
+        setBackground(new java.awt.Color(204, 204, 204));
         setFont(new java.awt.Font("Adobe Arabic", 0, 14)); // NOI18N
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -126,7 +140,8 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new EditSubject().setVisible(true);
+       
+            new EditSubject(this.id,this.name,this.surname,this.sec).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

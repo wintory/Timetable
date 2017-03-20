@@ -15,6 +15,7 @@ public class Login extends JFrame implements ActionListener {
         private javax.swing.JButton jButton2;
         private javax.swing.JButton jButton3;
         private javax.swing.JLabel jLabel1;
+        
 
 	public static void main(String[] args) throws Exception {
 		Login login = new Login();
@@ -34,7 +35,7 @@ public class Login extends JFrame implements ActionListener {
 		JPanel panel2 = new JPanel();
 		JPanel panel3 = new JPanel();
 		JPanel panel4 = new JPanel();
-
+            
 		JLabel labelUser = new JLabel("Input StudentId : ");
 		panel1.add(labelUser);
 

@@ -157,7 +157,7 @@ public class Subject {
         List<Subject> allsub = null;
         Connection con = ConnectionBuilder.getConnection();
         Subject s = null;
-        String sql = "SELECT * FROM Subject";
+        String sql = "SELECT * FROM Subject group by subject.SubjectId;";
         try {
             PreparedStatement pstm = con.prepareStatement(sql);
             ResultSet rs = pstm.executeQuery();
