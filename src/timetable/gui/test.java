@@ -19,7 +19,7 @@ public class test {
         List<Subject> list = Subject.searchSubject("INT101");
         if(list!=null){
             Subject s = new Subject();
-            System.out.println(s);
+           
         }
     }
 }
