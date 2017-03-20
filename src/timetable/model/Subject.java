@@ -123,6 +123,66 @@ public class Subject {
     }
     
     
+    public static List<Subject> searchSubId(String subid) throws SQLException{
+        List<Subject> allsub = null;
+        Connection con = ConnectionBuilder.getConnection();
+        Subject s = null;
+        String sql = "SELECT * FROM Subject WHERE subId = ?";
+        try {
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1,subid.toUpperCase());
+            ResultSet rs = pstm.executeQuery();
+            while(rs.next()){
+                s = new Subject();
+                s.setSubId(rs.getInt("subId"));
+                s.setSubjectId(rs.getString("subjectId"));
+                s.setSubjectName(rs.getString("subjectName"));
+                s.setSec(rs.getInt("sec"));
+                s.setStdDay(rs.getString("stdDay"));
+                s.setStrTime(rs.getString("strTime"));
+                s.setEnTime(rs.getString("enTime"));  
+                if(allsub==null){
+                    allsub = new ArrayList();   
+                }
+                allsub.add(s);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return allsub;
+    }
+    
+    
+      public static List<Subject> searchAllSubject() throws SQLException{
+        List<Subject> allsub = null;
+        Connection con = ConnectionBuilder.getConnection();
+        Subject s = null;
+        String sql = "SELECT * FROM Subject";
+        try {
+            PreparedStatement pstm = con.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            while(rs.next()){
+                s = new Subject();
+                s.setSubId(rs.getInt("subId"));
+                s.setSubjectId(rs.getString("subjectId"));
+                s.setSubjectName(rs.getString("subjectName"));
+                s.setSec(rs.getInt("sec"));
+                s.setStdDay(rs.getString("stdDay"));
+                s.setStrTime(rs.getString("strTime"));
+                s.setEnTime(rs.getString("enTime"));  
+                if(allsub==null){
+                    allsub = new ArrayList();   
+                }
+                allsub.add(s);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return allsub;
+    }
+    
+    
+    
 
     @Override
     public String toString() {
