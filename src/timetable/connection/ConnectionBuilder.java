@@ -11,7 +11,7 @@ public class ConnectionBuilder{
   public static Connection getConnection() throws SQLException
   {
  
-      Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/Timetable", "root", "root");
+Connection con = DriverManager.getConnection("jdbc:mysql://ap-cdbr-azure-southeast-b.cloudapp.net:3306/preregis?zeroDateTimeBehavior=convertToNull", "b271179b96ae42", "08e9afdb");
       System.out.println("db connected");
       return con;
    
