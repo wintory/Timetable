@@ -10,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import timetable.connection.ConnectionBuilder;
 
 /**
@@ -85,7 +87,8 @@ public class Subject {
         this.enTime = enTime;
     }
     
-    public static Subject searchSubject(String subid) throws SQLException{
+    public static List<Subject> searchSubject(String subid) throws SQLException{
+        List<Subject> allsub = null;
         Connection con = ConnectionBuilder.getConnection();
         Subject s = null;
         String sql = "SELECT * FROM Subject WHERE subjectId = ? ";
@@ -93,7 +96,7 @@ public class Subject {
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.setString(1,subid.toUpperCase());
             ResultSet rs = pstm.executeQuery();
-            if(rs.next()){
+            while(rs.next()){
                 s = new Subject();
                 s.setSubId(rs.getInt("subId"));
                 s.setSubjectId(rs.getString("subjectId"));
@@ -101,14 +104,16 @@ public class Subject {
                 s.setSec(rs.getInt("sec"));
                 s.setStdDay(rs.getString("stdDay"));
                 s.setStrTime(rs.getString("strTime"));
-                s.setEnTime(rs.getString("enTime"));
-                System.out.println(s.getSubId());
-                System.out.println(s.getSubjectName());
+                s.setEnTime(rs.getString("enTime"));       
+                if(allsub==null){
+                    allsub = new ArrayList();   
+                }
+                allsub.add(s);
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        return s;
+        return allsub;
     }
     
     
