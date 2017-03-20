@@ -12,9 +12,9 @@ public class Login extends JFrame implements ActionListener {
 	private JPasswordField passwordField;
 	private JLabel showStatus;
 	private JTextField textField;
-         private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+        private javax.swing.JButton jButton2;
+        private javax.swing.JButton jButton3;
+        private javax.swing.JLabel jLabel1;
 
 	public static void main(String[] args) throws Exception {
 		Login login = new Login();
@@ -54,6 +54,7 @@ public class Login extends JFrame implements ActionListener {
 		panel3.add(btn);
 
 		this.showStatus = new JLabel("Status : ");
+                this.showStatus.setVisible(false);
 		panel4.add(this.showStatus);
              
 		panel.add(panel1);
@@ -83,6 +84,7 @@ public class Login extends JFrame implements ActionListener {
 			new Menu(a.getStdid(),a.getName(),a.getSurname(),a.getSec()).setVisible(true);
 		}
 		else{
+                        this.showStatus.setVisible(true);
 			this.showStatus.setText("Status :    id/password   incorrect");
 		}
 	}

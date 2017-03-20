@@ -31,8 +31,8 @@ public class Subject {
     public Subject() {
     }
     
-    public Subject(String id) throws SQLException {
-        searchSubject(id);
+    public Subject(String id,int sec) throws SQLException {
+        searchSubject(id,sec);
     }
     
 
@@ -92,14 +92,15 @@ public class Subject {
         this.enTime = enTime;
     }
     
-    public static List<Subject> searchSubject(String subid) throws SQLException{
+    public static List<Subject> searchSubject(String subid,int sec) throws SQLException{
         List<Subject> allsub = null;
         Connection con = ConnectionBuilder.getConnection();
         Subject s = null;
-        String sql = "SELECT * FROM Subject WHERE subjectId = ? ";
+        String sql = "SELECT * FROM Subject WHERE subjectId = ? and sec = ?";
         try {
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.setString(1,subid.toUpperCase());
+            pstm.setInt(2,sec);
             ResultSet rs = pstm.executeQuery();
             while(rs.next()){
                 s = new Subject();
