@@ -8,7 +8,12 @@ package timetable.gui;
 import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import timetable.model.Subject;
+import timetable.model.Timetable;
 
 /**
  *
@@ -28,11 +33,11 @@ public class EditSubject extends javax.swing.JFrame {
         this.sec = sec;
         
         
-        List<Subject> subb = Subject.searchAllSubject();
+        List<Subject> subb = Subject.RecommendSubject();
         for(Subject s : subb){
-            jComboBox1.addItem(s.getSubjectId()+"   sec : "+s.getSec());
-            System.out.println(jComboBox1.getSelectedItem());
+            jComboBox1.addItem(s.getSubjectId()+"   sec : "+s.getSec()+"   "+s.getStdDay()+"   "+s.getStrTime()+"-"+s.getEnTime());
         }
+
     }
 
     public EditSubject() {
@@ -165,10 +170,10 @@ public class EditSubject extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1)
-                        .addGap(195, 195, 195))))
+                        .addGap(159, 159, 159))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +198,17 @@ public class EditSubject extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+         String subId = (String) jComboBox1.getSelectedItem();
+         String subid = subId.substring(0,6);
+         String sec = subId.substring(15,16);
+         int newsec = Integer.parseInt(sec);
+            // System.out.println(subid);
+        try {  
+            Subject s = Subject.searchSubid(subid, newsec);
+            String t = Timetable.addTimetable(this.id, s.getSubId());
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

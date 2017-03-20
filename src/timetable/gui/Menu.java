@@ -141,11 +141,19 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        
+        try {
             new EditSubject(this.id,this.name,this.surname,this.sec).setVisible(true);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       new Searchsubject().setVisible(true);
+        try {
+            new Searchsubject().setVisible(true);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

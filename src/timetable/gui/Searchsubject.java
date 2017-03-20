@@ -32,7 +32,6 @@ public class Searchsubject extends javax.swing.JFrame {
         List<Subject> subb = Subject.searchAllSubject();
         for(Subject s : subb){
             jComboBox1.addItem(s.getSubjectId());
-            System.out.println(jComboBox1.getSelectedItem());
         }
     }
 
@@ -223,7 +222,7 @@ public class Searchsubject extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed

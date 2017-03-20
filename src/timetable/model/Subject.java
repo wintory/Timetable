@@ -123,11 +123,11 @@ public class Subject {
     }
     
     
-    public static List<Subject> searchSubId(String subid) throws SQLException{
+    public static List<Subject> searchTimetable(String stdid,String subid) throws SQLException{
         List<Subject> allsub = null;
         Connection con = ConnectionBuilder.getConnection();
         Subject s = null;
-        String sql = "SELECT * FROM Subject WHERE subId = ?";
+        String sql = "SELECT * FROM subject s INNER JOIN timetable t INNER JOIN account a ON t.subId = s.subId and a.stdId = ?";
         try {
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.setString(1,subid.toUpperCase());
@@ -153,11 +153,32 @@ public class Subject {
     }
     
     
+    public static Subject searchSubid(String subjectid,int sec) throws SQLException{
+        List<Subject> allsub = null;
+        Connection con = ConnectionBuilder.getConnection();
+        Subject s = null;
+        String sql = "SELECT subId FROM subject where subjectId = ? and sec = ?";
+        try {
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1,subjectid.toUpperCase());
+            pstm.setInt(1,sec);
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+                s = new Subject();
+                s.setSubId(rs.getInt("subId"));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return s;
+    }
+    
+    
       public static List<Subject> searchAllSubject() throws SQLException{
         List<Subject> allsub = null;
         Connection con = ConnectionBuilder.getConnection();
         Subject s = null;
-        String sql = "SELECT * FROM Subject group by subject.SubjectId;";
+        String sql = "SELECT * FROM Subject group by subject.SubjectId";
         try {
             PreparedStatement pstm = con.prepareStatement(sql);
             ResultSet rs = pstm.executeQuery();
@@ -181,7 +202,33 @@ public class Subject {
         return allsub;
     }
     
-    
+    public static List<Subject> RecommendSubject() throws SQLException{
+        List<Subject> allsub = null;
+        Connection con = ConnectionBuilder.getConnection();
+        Subject s = null;
+        String sql = "SELECT * FROM Subject";
+        try {
+            PreparedStatement pstm = con.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            while(rs.next()){
+                s = new Subject();
+                s.setSubId(rs.getInt("subId"));
+                s.setSubjectId(rs.getString("subjectId"));
+                s.setSubjectName(rs.getString("subjectName"));
+                s.setSec(rs.getInt("sec"));
+                s.setStdDay(rs.getString("stdDay"));
+                s.setStrTime(rs.getString("strTime"));
+                s.setEnTime(rs.getString("enTime"));  
+                if(allsub==null){
+                    allsub = new ArrayList();   
+                }
+                allsub.add(s);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return allsub;
+    }
     
 
     @Override

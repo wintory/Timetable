@@ -52,8 +52,9 @@ public class Timetable {
     }
     
     
-    public static String addTimetable(String stdid, String subid) throws SQLException
-  {
+    
+    public static String addTimetable(String stdid, int subid) throws SQLException
+  {    
     String message = "";
     Connection con = ConnectionBuilder.getConnection();
     String sql = "INSERT INTO timetable VALUE(?,?)";
@@ -61,7 +62,7 @@ public class Timetable {
     {
       PreparedStatement pstm = con.prepareStatement(sql);
       pstm.setString(1, stdid);
-      pstm.setString(2, subid);
+      pstm.setInt(2, subid);
       pstm.executeUpdate();
       message = "add Success";
     }
