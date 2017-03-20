@@ -77,7 +77,7 @@ public class Login extends JFrame implements ActionListener {
             } catch (SQLException ex) {
                 System.out.println("SQLException");
             }
-		if(a==null){        
+		if(a!=null){        
 			new Menu().setVisible(true);
 		}
 		else{
