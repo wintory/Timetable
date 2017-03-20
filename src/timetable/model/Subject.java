@@ -112,4 +112,11 @@ public class Subject {
     }
     
     
+
+    @Override
+    public String toString() {
+        return "Subject{" + "subId=" + subId + ", subjectId=" + subjectId + ", subjectName=" + subjectName + ", sec=" + sec + ", stdDay=" + stdDay + ", strTime=" + strTime + ", enTime=" + enTime + '}';
+    }
+    
+    
 }

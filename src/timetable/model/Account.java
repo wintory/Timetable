@@ -94,7 +94,7 @@ public class Account
   {
     Account a = null;
     Connection con = ConnectionBuilder.getConnection();
-    String sql = "SELECT * FROM Account WHERE stdId = ? and password = ?";
+    String sql = "SELECT * FROM ACCOUNT WHERE stdId = ? and password = ?";
     try
     {
       PreparedStatement pstm = con.prepareStatement(sql);
@@ -109,8 +109,6 @@ public class Account
         a.setSurname(rs.getString("stdSurname"));
         a.setPassword(rs.getString("password"));
         a.setSec(rs.getInt("sec"));
-          System.out.println(a.getName());
-          System.out.println(a.getPassword());
       }
     }
     catch (SQLException e)

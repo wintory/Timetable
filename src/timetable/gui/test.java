@@ -5,7 +5,10 @@
  */
 package timetable.gui;
 
+import java.sql.Connection;
 import java.sql.SQLException;
+import timetable.connection.ConnectionBuilder;
+import timetable.model.Account;
 import timetable.model.Subject;
 
 /**
@@ -14,7 +17,9 @@ import timetable.model.Subject;
  */
 public class test {
     public static void main(String[] args) throws SQLException {
-        Subject s = new Subject();
-        s.searchSubject("INT101");
+        Account ac = Account.getAccount("57130500001", "12345");
+        System.out.println(ac.getStdid());
+
+
     }
 }

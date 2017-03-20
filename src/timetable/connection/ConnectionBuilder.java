@@ -12,6 +12,7 @@ public class ConnectionBuilder{
   {
  
       Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/Timetable", "root", "root");
+      System.out.println("db connected");
       return con;
    
 }
