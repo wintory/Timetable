@@ -30,6 +30,11 @@ public class Subject {
 
     public Subject() {
     }
+    
+    public Subject(String id) throws SQLException {
+        searchSubject(id);
+    }
+    
 
     public int getSubId() {
         return subId;
@@ -104,7 +109,7 @@ public class Subject {
                 s.setSec(rs.getInt("sec"));
                 s.setStdDay(rs.getString("stdDay"));
                 s.setStrTime(rs.getString("strTime"));
-                s.setEnTime(rs.getString("enTime"));       
+                s.setEnTime(rs.getString("enTime"));  
                 if(allsub==null){
                     allsub = new ArrayList();   
                 }
@@ -120,7 +125,7 @@ public class Subject {
 
     @Override
     public String toString() {
-        return "Subject{" + "subId=" + subId + ", subjectId=" + subjectId + ", subjectName=" + subjectName + ", sec=" + sec + ", stdDay=" + stdDay + ", strTime=" + strTime + ", enTime=" + enTime + '}';
+        return "Subject{" + "subId=" + this.subId + ", subjectId=" + this.subjectId + ", subjectName=" + this.subjectName + ", sec=" + this.sec + ", stdDay=" + stdDay + ", strTime=" + strTime + ", enTime=" + enTime + '}';
     }
     
     

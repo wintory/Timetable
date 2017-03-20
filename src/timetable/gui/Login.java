@@ -42,9 +42,11 @@ public class Login extends JFrame implements ActionListener {
 		panel2.add(labelPass);
 
 		this.textField = new JTextField(10);
+                textField.setBackground(new java.awt.Color(204, 255, 204));
 		panel1.add(this.textField);
 
-		this.passwordField = new JPasswordField(10);       
+		this.passwordField = new JPasswordField(10);  
+                passwordField.setBackground(new java.awt.Color(204, 255, 204));
 		panel2.add(this.passwordField);
 
 		JButton btn = new JButton("Login");
@@ -78,10 +80,10 @@ public class Login extends JFrame implements ActionListener {
                 System.out.println("SQLException");
             }
 		if(a!=null){        
-			new Menu(a.getStdid(),a.getName(),a.getSec()).setVisible(true);
+			new Menu(a.getStdid(),a.getName(),a.getSurname(),a.getSec()).setVisible(true);
 		}
 		else{
-			this.showStatus.setText("Status : id/password incorrect");
+			this.showStatus.setText("Status :    id/password   incorrect");
 		}
 	}
 }

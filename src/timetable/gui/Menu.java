@@ -15,11 +15,16 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
     }
     
-    public Menu(String id,String name,int sec) {
+    public Menu(String id,String name,String surname,int sec) {
         initComponents();
         jLabel3.setText("ID :"+id);
-        jLabel1.setText("Name :"+name);
+        jLabel1.setText("Name :"+name+" "+surname);
         jLabel4.setText("Sec :"+sec);
+        String sub = id.substring(0,2);
+        String chk = "59";
+        if(sub.equals(chk)){
+            jButton2.setVisible(false);
+        }
     }
 
     /**
@@ -64,8 +69,9 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Name :");
 
-        jLabel2.setBackground(new java.awt.Color(255, 102, 0));
+        jLabel2.setBackground(new java.awt.Color(255, 0, 51));
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 0, 0));
         jLabel2.setText("Menu");
 
         jLabel3.setBackground(new java.awt.Color(255, 102, 0));
@@ -94,7 +100,7 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
-                        .addGap(76, 76, 76))))
+                        .addGap(66, 66, 66))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
