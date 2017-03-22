@@ -90,6 +90,7 @@ public class Account
     {
       System.out.println(e);
     }
+    con.close();
     return a;
   }
   
@@ -118,6 +119,7 @@ public class Account
     {
       System.out.println(e);
     }
+    con.close();
     return a;
   }
 }
