@@ -119,6 +119,7 @@ public class Subject {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.close();
         return allsub;
     }
     
@@ -149,6 +150,7 @@ public class Subject {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.close();
         return allsub;
     }
     
@@ -170,6 +172,7 @@ public class Subject {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.close();
         return s;
     }
     
@@ -199,6 +202,7 @@ public class Subject {
         } catch (Exception e) {
             System.out.println(e);
         }
+          con.close();
         return allsub;
     }
     
@@ -227,6 +231,7 @@ public class Subject {
         } catch (Exception e) {
             System.out.println(e);
         }
+        con.close();
         return allsub;
     }
     
