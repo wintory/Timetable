@@ -70,6 +70,7 @@ public class Timetable {
     {
       message = "add Fail";
     }
+    con.close();
     return message;
     
   }
@@ -92,6 +93,7 @@ public class Timetable {
     {
       message = "delete Fail";
     }
+    con.close();
     return message;
   }
 }
