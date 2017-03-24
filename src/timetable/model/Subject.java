@@ -117,7 +117,7 @@ public class Subject {
                 allsub.add(s);
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("aaa");
         }
         con.close();
         return allsub;
@@ -156,6 +156,7 @@ public class Subject {
     
     
     public static Subject searchSubid(String subjectid,int sec) throws SQLException{
+        System.out.println("search : "+subjectid+" "+sec);
         List<Subject> allsub = null;
         Connection con = ConnectionBuilder.getConnection();
         Subject s = null;
@@ -163,11 +164,13 @@ public class Subject {
         try {
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.setString(1,subjectid.toUpperCase());
-            pstm.setInt(1,sec);
+            pstm.setString(1,subjectid);
+            pstm.setInt(2,sec);
             ResultSet rs = pstm.executeQuery();
             if(rs.next()){
                 s = new Subject();
                 s.setSubId(rs.getInt("subId"));
+                System.out.println(s.getSubId());
             }
         } catch (Exception e) {
             System.out.println(e);

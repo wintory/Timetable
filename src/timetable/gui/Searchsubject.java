@@ -105,7 +105,7 @@ public class Searchsubject extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 0, 102));
-        jLabel6.setText("status : invalid id/sec");
+        jLabel6.setText("status : invalid sec");
 
         jComboBox1.setBackground(new java.awt.Color(153, 255, 255));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +115,7 @@ public class Searchsubject extends javax.swing.JFrame {
         });
 
         jComboBox2.setBackground(new java.awt.Color(153, 255, 255));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -136,10 +136,7 @@ public class Searchsubject extends javax.swing.JFrame {
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(jLabel6))))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -147,15 +144,18 @@ public class Searchsubject extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21)
+                                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -171,9 +171,9 @@ public class Searchsubject extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
@@ -192,16 +192,16 @@ public class Searchsubject extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        String subId = (String) jComboBox1.getSelectedItem();
-        String sec = (String) jComboBox2.getSelectedItem();
-        if(subId == null || sec ==null){
-            jLabel6.setVisible(true);
-        }else{
+            jLabel6.setVisible(false);
+            visibleFalse();
+            String subId = (String) jComboBox1.getSelectedItem();
+             String sec = (String) jComboBox2.getSelectedItem();
             int psec = Integer.parseInt(sec);
             List<Subject> s = null;
             try {
                 s = Subject.searchSubject(subId,psec);
-                for (Subject all : s) {
+                if(s!=null){
+                    for (Subject all : s) {
                     jLabel2.setVisible(true);
                     jLabel8.setVisible(true);
                     jLabel9.setVisible(true);
@@ -215,14 +215,17 @@ public class Searchsubject extends javax.swing.JFrame {
                     jLabel11.setText("Start Time : "+all.getStrTime());
                     jLabel12.setText("Start Time : "+all.getEnTime());
                 }
+                }else{
+                    jLabel6.setVisible(true);
+                }
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
-        }
+        
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
@@ -286,4 +289,15 @@ public class Searchsubject extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
+
+    private void visibleFalse() {
+        
+    jLabel2.setVisible(true);
+                    jLabel2.setVisible(false);
+                    jLabel8.setVisible(false);
+                    jLabel9.setVisible(false);
+                    jLabel10.setVisible(false);
+                    jLabel11.setVisible(false);
+                    jLabel12.setVisible(false);
+    }
 }
