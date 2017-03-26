@@ -117,21 +117,21 @@ public class Subject {
                 allsub.add(s);
             }
         } catch (Exception e) {
-            System.out.println("aaa");
+            System.out.println(e);
         }
         con.close();
         return allsub;
     }
     
     
-    public static List<Subject> searchTimetable(String stdid,String subid) throws SQLException{
+    public static List<Subject> searchTimetable(String stdid) throws SQLException{
         List<Subject> allsub = null;
         Connection con = ConnectionBuilder.getConnection();
         Subject s = null;
-        String sql = "SELECT * FROM subject s INNER JOIN timetable t INNER JOIN account a ON t.subId = s.subId and a.stdId = ?";
+        String sql = "SELECT * FROM subject s INNER JOIN timetable t ON t.subId = s.subId and t.stdId = ?";
         try {
             PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1,subid.toUpperCase());
+            pstm.setString(1,stdid);
             ResultSet rs = pstm.executeQuery();
             while(rs.next()){
                 s = new Subject();
@@ -155,8 +155,9 @@ public class Subject {
     }
     
     
+    
+    
     public static Subject searchSubid(String subjectid,int sec) throws SQLException{
-        System.out.println("search : "+subjectid+" "+sec);
         List<Subject> allsub = null;
         Connection con = ConnectionBuilder.getConnection();
         Subject s = null;
@@ -170,7 +171,6 @@ public class Subject {
             if(rs.next()){
                 s = new Subject();
                 s.setSubId(rs.getInt("subId"));
-                System.out.println(s.getSubId());
             }
         } catch (Exception e) {
             System.out.println(e);

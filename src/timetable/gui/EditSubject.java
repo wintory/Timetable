@@ -23,6 +23,7 @@ public class EditSubject extends javax.swing.JFrame {
 
     private String id;
     private int sec;   
+    List<Subject> timetable ;
     
     public EditSubject(String id,String name,String surname,int sec) throws SQLException {
         initComponents();
@@ -37,7 +38,11 @@ public class EditSubject extends javax.swing.JFrame {
         for(Subject s : subb){
             jComboBox1.addItem(s.getSubjectId()+"   sec : "+s.getSec()+"   "+s.getStdDay()+"   "+s.getStrTime()+"-"+s.getEnTime());
         }
-
+        
+        timetable = Subject.searchTimetable(id);
+        for(Subject s : timetable){
+            System.out.println(s.getSubjectId()+"   sec : "+s.getSec()+"   "+s.getStdDay()+"   "+s.getStrTime()+"-"+s.getEnTime());
+        }
     }
 
     public EditSubject() {
@@ -211,7 +216,6 @@ public class EditSubject extends javax.swing.JFrame {
          String subid = subId.substring(0,6);
          String sec = subId.substring(15,16);
          int newsec = Integer.parseInt(sec);
-         System.out.println(newsec);
         try {  
             Subject s = Subject.searchSubid(subid, newsec);
             String t = Timetable.addTimetable(this.id, s.getSubId());
@@ -221,6 +225,8 @@ public class EditSubject extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

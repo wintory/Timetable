@@ -64,8 +64,7 @@ public class Timetable {
       pstm.executeQuery();
       ResultSet rs = pstm.executeQuery();
       if(rs.next()){
-          a = rs.getInt("COUNT(tableid)");
-          System.out.println(a);
+          a = rs.getInt("COUNT(tableid)")+1;
       }
     }
     catch (SQLException e)
@@ -76,25 +75,62 @@ public class Timetable {
     
   }
     
+    
+    public static String checkTimetable(String stdid,int subid) throws SQLException{
+       String msg = "";
+       Connection con = ConnectionBuilder.getConnection();
+       String sql = "SELECT COUNT(stdId) FROM timetable where stdId = ? and subId = ?";
+    try
+    {
+      PreparedStatement pstm = con.prepareStatement(sql);
+      pstm.setString(1, stdid);
+      pstm.setInt(2, subid);
+      ResultSet rs = pstm.executeQuery();
+      if(rs.next()){
+          int a = rs.getInt("COUNT(stdId)");
+          if(a==0){
+               msg = "success";
+          }else{
+              msg = "fail";
+          }
+      }
+    }
+    catch (SQLException e)
+    {
+        System.out.println(e);
+    }
+    con.close();
+        System.out.println("msg "+msg);
+    return msg;   
+    }
+    
     public static String addTimetable(String stdid, int subid) throws SQLException
-  {    
+  {   
     String message = "";
     Connection con = ConnectionBuilder.getConnection();
     String sql = "INSERT INTO timetable VALUE(?,?,?)";
     int tableid = countTableId();
-    try
-    {
-      PreparedStatement pstm = con.prepareStatement(sql);
-      pstm.setInt(1, tableid);
-      pstm.setString(2, stdid);
-      pstm.setInt(3, subid);
-      pstm.executeUpdate();
-      message = "add Success";
+    String t = checkTimetable(stdid, subid); 
+    System.out.println("chk : "+t);
+    if(t=="success"){
+        try
+        {
+         PreparedStatement pstm = con.prepareStatement(sql);
+         pstm.setInt(1, tableid);
+         pstm.setString(2, stdid);
+         pstm.setInt(3, subid);
+         pstm.executeUpdate();
+           message = "add Success";
+        }
+         catch (SQLException e)
+        {
+            System.out.println(e);
+            message = "add Fail Exception";
+        }
+    }else{
+        message = "Subject is already added";
     }
-    catch (SQLException e)
-    {
-      message = "add Fail";
-    }
+    
     con.close();
     return message;
     
@@ -121,4 +157,5 @@ public class Timetable {
     con.close();
     return message;
   }
+    
 }
