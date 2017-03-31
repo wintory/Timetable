@@ -124,6 +124,37 @@ public class Subject {
     }
     
     
+      public static List<Subject> searchSubject(int subid) throws SQLException{
+        List<Subject> allsub = null;
+        Connection con = ConnectionBuilder.getConnection();
+        Subject s = null;
+        String sql = "SELECT * FROM Subject WHERE subId = ?";
+        try {
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setInt(1,subid);
+            ResultSet rs = pstm.executeQuery();
+            while(rs.next()){
+                s = new Subject();
+                s.setSubId(rs.getInt("subId"));
+                s.setSubjectId(rs.getString("subjectId"));
+                s.setSubjectName(rs.getString("subjectName"));
+                s.setSec(rs.getInt("sec"));
+                s.setStdDay(rs.getString("stdDay"));
+                s.setStrTime(rs.getString("strTime"));
+                s.setEnTime(rs.getString("enTime"));  
+                if(allsub==null){
+                    allsub = new ArrayList();   
+                }
+                allsub.add(s);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        con.close();
+        return allsub;
+    }
+    
+    
     public static List<Subject> searchTimetable(String stdid) throws SQLException{
         List<Subject> allsub = null;
         Connection con = ConnectionBuilder.getConnection();

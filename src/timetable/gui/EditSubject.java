@@ -39,12 +39,7 @@ public class EditSubject extends javax.swing.JFrame {
             jComboBox1.addItem(s.getSubjectId()+"   sec : "+s.getSec()+"   "+s.getStdDay()+"   "+s.getStrTime()+"-"+s.getEnTime());
         }
         
-        
-        timetable = Subject.searchTimetable(id);
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        for(Subject s : timetable){
-            model.addRow(new Object[]{s.getSubjectId(), s.getSubjectName(), s.getSec(),s.getStdDay(),s.getStrTime(),s.getEnTime()});
-        }
+        showTimetable();
     }
 
     public EditSubject() {
@@ -91,6 +86,7 @@ public class EditSubject extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         jLabel3.setBackground(new java.awt.Color(255, 102, 0));
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -141,15 +137,22 @@ public class EditSubject extends javax.swing.JFrame {
 
             },
             new String [] {
-                "subject id", "subjact name", "sec", "day", "lstart time", "end time"
+                "subId", "subject id", "subjact name", "sec", "day", "start time", "end time"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane2.setViewportView(jTable1);
@@ -157,6 +160,14 @@ public class EditSubject extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 0, 102));
         jLabel8.setText("status : invalid id/sec");
+
+        jButton2.setBackground(new java.awt.Color(51, 204, 255));
+        jButton2.setText("Delete");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,7 +197,10 @@ public class EditSubject extends javax.swing.JFrame {
                         .addComponent(jLabel7))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(329, 329, 329)
+                        .addComponent(jButton2)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -207,7 +221,9 @@ public class EditSubject extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,19 +237,35 @@ public class EditSubject extends javax.swing.JFrame {
         try {  
             Subject s = Subject.searchSubid(subid, newsec);
             String t = Timetable.addTimetable(this.id, s.getSubId());
+            showTimetable();
             jLabel8.setVisible(true);
             jLabel8.setText("status : "+t);
+            
             
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int row[] = jTable1.getSelectedRows();
+        int subid = (int)(model.getValueAt(row[0],0));
+        String t;
+        try {
+            t = Timetable.deleteTimetable(this.id,subid);
+            showTimetable();
+             jLabel8.setVisible(true);
+            jLabel8.setText("status : "+t);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,9 +303,20 @@ public class EditSubject extends javax.swing.JFrame {
     }
 
     
+    public void showTimetable() throws SQLException{
+        timetable = Subject.searchTimetable(this.id);
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.getDataVector().removeAllElements();
+        for(Subject s : timetable){
+            model.addRow(new Object[]{s.getSubId(),s.getSubjectId(), s.getSubjectName(), s.getSec(),s.getStdDay(),s.getStrTime(),s.getEnTime()});
+        }
+}
+    
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
