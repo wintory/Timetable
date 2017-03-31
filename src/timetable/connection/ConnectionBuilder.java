@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 public class ConnectionBuilder {
 
     public static Connection getConnection() throws SQLException {
-
-        Connection con = DriverManager.getConnection("jdbc:mysql://ap-cdbr-azure-southeast-b.cloudapp.net:3306/preregis?zeroDateTimeBehavior=convertToNull", "b271179b96ae42", "08e9afdb");
-        System.out.println("db connected");
+  
+       Connection con = DriverManager.getConnection("jdbc:mysql://ap-cdbr-azure-southeast-b.cloudapp.net:3306/preregis?zeroDateTimeBehavior=convertToNull", "b271179b96ae42", "08e9afdb");
+       // Connection con = DriverManager.getConnection("jdbc:mysql://10.4.56.10:3306/preregis?zeroDateTimeBehavior=convertToNull", "new", "new");
         return con;
 
     }

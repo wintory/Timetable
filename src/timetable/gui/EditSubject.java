@@ -39,9 +39,11 @@ public class EditSubject extends javax.swing.JFrame {
             jComboBox1.addItem(s.getSubjectId()+"   sec : "+s.getSec()+"   "+s.getStdDay()+"   "+s.getStrTime()+"-"+s.getEnTime());
         }
         
+        
         timetable = Subject.searchTimetable(id);
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         for(Subject s : timetable){
-            System.out.println(s.getSubjectId()+"   sec : "+s.getSec()+"   "+s.getStdDay()+"   "+s.getStrTime()+"-"+s.getEnTime());
+            model.addRow(new Object[]{s.getSubjectId(), s.getSubjectName(), s.getSec(),s.getStdDay(),s.getStrTime(),s.getEnTime()});
         }
     }
 
@@ -136,7 +138,7 @@ public class EditSubject extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "subject id", "subjact name", "sec", "day", "lstart time", "end time"
