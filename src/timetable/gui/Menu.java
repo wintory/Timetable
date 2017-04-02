@@ -30,11 +30,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel3.setText("ID :"+id);
         jLabel1.setText("Name :"+name+" "+surname);
         jLabel4.setText("Sec :"+sec);
-        String sub = id.substring(0,2);
-        String chk = "59";
-        if(sub.equals(chk)){
-            jButton2.setVisible(false);
-        }
         this.id = id;
         this.name=name;
         this.sec=sec;

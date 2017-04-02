@@ -27,6 +27,13 @@ public class EditSubject extends javax.swing.JFrame {
     
     public EditSubject(String id,String name,String surname,int sec) throws SQLException {
         initComponents();
+        String sub = id.substring(0,2);
+        String chk = "59";
+        if(sub.equals(chk)){
+            jButton2.setVisible(false);
+            jComboBox1.setVisible(false);
+            jButton1.setVisible(false);
+        }
         jLabel8.setVisible(false);
         jLabel5.setText("ID :"+id);
         jLabel2.setText("Name :"+name+" "+surname);
@@ -130,7 +137,7 @@ public class EditSubject extends javax.swing.JFrame {
         jLabel7.setBackground(new java.awt.Color(255, 102, 0));
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(204, 0, 51));
-        jLabel7.setText("Edit Subject");
+        jLabel7.setText("MyTimetable");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
